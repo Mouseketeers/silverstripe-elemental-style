@@ -5,11 +5,9 @@ namespace Jellygnite\ElementalStyle\Controller;
 use \Page;
 use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\Control\HTTPRequest;
-use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\HTTPResponse_Exception;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\SecurityToken;
-use SilverStripe\Dev\Debug;
 
 class AdminElementalStyleController extends ContentController {
 	

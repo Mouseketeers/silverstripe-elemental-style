@@ -2,19 +2,17 @@
 
 namespace Jellygnite\ElementalStyle\Forms;
 
-use SilverStripe\Core\Convert;
+use SilverStripe\Model\ArrayData;
+use SilverStripe\Model\List\ArrayList;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\View\ArrayData;
-use SilverStripe\Dev\Debug;
 
 
 class ImageOptionsetField extends OptionsetField
 {
 	protected $objects = null;
 	
-	public function __construct($name, $title = null, $source = array(), $value = null, $objects = array())
+	public function __construct($name, $title = null, $source = [], $value = null, $objects = [])
     {
         if ($source) {
             $this->objects = $objects;
@@ -31,7 +29,7 @@ class ImageOptionsetField extends OptionsetField
             'Name' => $this->getOptionName(),
             'Value' => $value,
             'Title' => $title,
-            'isChecked' => $this->isSelectedValue($value, $this->Value()),
+            'isChecked' => $this->isSelectedValue($value, $this->getFormattedValue()),
             'isDisabled' => $this->isDisabledValue($value),
 			'Object' => $object
         ]);

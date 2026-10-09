@@ -1,8 +1,8 @@
 <?php
 namespace Jellygnite\ElementalStyle\Model;
 
+use JsonSerializable;
 use SilverStripe\Forms\FormField;
-use SilverStripe\Dev\Debug;
 /**
  * Class StyleObject.
  *
@@ -22,7 +22,7 @@ use SilverStripe\Dev\Debug;
  *
  */
  
-class StyleObject implements \JsonSerializable {
+class StyleObject implements JsonSerializable {
 	
 	
 	protected $index;
@@ -88,7 +88,7 @@ class StyleObject implements \JsonSerializable {
 
     public function jsonSerialize(): mixed
     {
-        return array(
+        return [
              'Index' => $this->getIndex(),
              'Title' => $this->getTitle(),
              'Description' => $this->getDescription(),
@@ -96,7 +96,7 @@ class StyleObject implements \JsonSerializable {
              'Location' => $this->getLocation(),
              'After' => $this->getAfter(),
              'Styles' => $this->getStyles(),
-        );
+        ];
     }
 
 	public function getIndex(){

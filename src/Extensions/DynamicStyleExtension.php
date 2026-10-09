@@ -2,36 +2,24 @@
 
 namespace Jellygnite\ElementalStyle\Extensions;
 
+use SilverStripe\Core\Extension;
 use Jellygnite\ElementalStyle\Model\StyleObject;
 use Jellygnite\SliderField\SliderField;
 use Jellygnite\ElementalStyle\Forms\ImageOptionsetField;
-use Jellygnite\ElementalStyle\Forms\CheckboxsetButtonsField;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\GroupedDropdownField;
 
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\ListboxField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\Forms\CompositeField;
-use DNADesign\Elemental\Controllers\ElementalAreaController;
-use DNADesign\Elemental\Forms\EditFormFactory;
-use SilverStripe\Control\Controller;
-use SilverStripe\Dev\Debug;
-use SilverStripe\Core\Injector\Injector;
-use Psr\Log\LoggerInterface;
 
-class DynamicStyleExtension extends DataExtension 
+class DynamicStyleExtension extends Extension 
 {
 	
 	private $is_duplicate = false;
@@ -287,7 +275,7 @@ class DynamicStyleExtension extends DataExtension
 						$styleFormField->setAttribute('data-es-default',$styleobject->getDefault());
 						$styleFormField->setAttribute('name',null); // prevent field from being submitted.
 
-					
+
 						// using tabbed layout
 						$tabName = (!empty($styleobject->getTab())) ?  $styleobject->getTab() : $default_tab_name;
 						if(!empty($tabName)) {
@@ -303,7 +291,7 @@ class DynamicStyleExtension extends DataExtension
 								$styleFormField 
 							);
 						}
-						
+
 						// no tabs all fields in line
 						/*
 						$fields->push(
@@ -333,7 +321,7 @@ class DynamicStyleExtension extends DataExtension
 	* @return array
 	*/	
 	protected function getEmptyString($fieldStyles) {
-		$emptystring =  _t(__CLASS__.'.EXTRA_STYLES', 'Please select...');
+		$emptystring =  _t(self::class.'.EXTRA_STYLES', 'Please select...');
 		foreach($fieldStyles as $key=>$value){
 			if(empty($value)) {
 				$emptystring = $key;
@@ -480,7 +468,7 @@ class DynamicStyleExtension extends DataExtension
      * @return string
      */		
 	protected static function getStyleFieldName($index){
-		return str_replace('\\', '_', __CLASS__) . '_' . $index;
+		return str_replace('\\', '_', self::class) . '_' . $index;
 			
 	}
 
@@ -502,7 +490,7 @@ class DynamicStyleExtension extends DataExtension
 				$haystack = $this->getStyleByLocation();
 			}
 		}
-		return ((((strpos($haystack, $cssclass )) ) !== false));
+		return ((str_contains($haystack, $cssclass )));
 	}
 	
     /**

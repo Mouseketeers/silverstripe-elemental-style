@@ -2,12 +2,8 @@
 
 namespace Jellygnite\ElementalStyle\Extensions;
 
-use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\Extension;
-use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\Form;
@@ -16,8 +12,6 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Security\Permission;
 use SilverStripe\Versioned\Versioned;
 use SilverStripe\View\Requirements;
-use SilverStripe\View\ThemeResourceLoader;
-use SilverStripe\Dev\Debug;
 
 use DNADesign\Elemental\Models\BaseElement;
 
@@ -87,7 +81,7 @@ class PageControllerExtension extends Extension {
 							 ->addExtraClass('jes-fieldgroup uk-animation-fade')
  							 ->addExtraClass($versionedstate)
 						);
-						$fields->addFieldsToTab( $el_tab_id, $ec_fields);
+						$fields->addFieldToTab( $el_tab_id, $ec_fields);
 					}
 					$actions = FieldList::create(
 						FormAction::create('doSaveStyle', 'Save All')
